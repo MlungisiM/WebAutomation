@@ -53,7 +53,7 @@ public abstract class base_class extends DriverFactory {
 
 
 
-   // @AfterMethod
+    @AfterMethod
     public void tearDown() {
         try {
             WebDriver driver = DriverFactory.getDriver();

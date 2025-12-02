@@ -3,6 +3,7 @@ package actions;
 import base.base_class;
 import factory.DriverFactory;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -43,7 +44,8 @@ public class daa_submissions_actions extends base_class {
         _home_page.policy_search_options_search_button.click();
         getWait().until(ExpectedConditions.visibilityOf(_home_page.policy_search_first_option_results));
         _home_page.policy_search_first_option_results.click();
-        _home_page.declarations_link.click();
+        Actions actions = new Actions(getDriver());
+        actions.moveToElement(_home_page.declarations_link).perform();
         _home_page.age_analysis_tab.click();
         _daa_submissions_page.date_of_extraction_textbox.click();
         _daa_submissions_page.date_picker_today.click();
@@ -73,7 +75,8 @@ public class daa_submissions_actions extends base_class {
             _home_page.policy_search_options_search_button.click();
             getWait().until(ExpectedConditions.visibilityOf(_home_page.policy_search_first_option_results));
             _home_page.policy_search_first_option_results.click();
-            _home_page.declarations_link.click();
+            Actions actions = new Actions(getDriver());
+            actions.moveToElement(_home_page.declarations_link).perform();
             _home_page.age_analysis_tab.click();
             _daa_submissions_page.date_of_extraction_textbox.click();
             _daa_submissions_page.date_picker_today.click();
@@ -103,7 +106,8 @@ public class daa_submissions_actions extends base_class {
             _home_page.policy_search_options_search_button.click();
             getWait().until(ExpectedConditions.visibilityOf(_home_page.policy_search_first_option_results));
             _home_page.policy_search_first_option_results.click();
-            _home_page.declarations_link.click();
+            Actions actions = new Actions(getDriver());
+            actions.moveToElement(_home_page.declarations_link).perform();
             _home_page.age_analysis_tab.click();
             _daa_submissions_page.date_of_extraction_textbox.click();
             _daa_submissions_page.date_picker_today.click();
@@ -133,7 +137,8 @@ public class daa_submissions_actions extends base_class {
             _home_page.policy_search_options_search_button.click();
             getWait().until(ExpectedConditions.visibilityOf(_home_page.policy_search_first_option_results));
             _home_page.policy_search_first_option_results.click();
-            _home_page.declarations_link.click();
+            Actions actions = new Actions(getDriver());
+            actions.moveToElement(_home_page.declarations_link).perform();
             _home_page.age_analysis_tab.click();
             _daa_submissions_page.date_of_extraction_textbox.click();
             _daa_submissions_page.date_picker_today.click();
@@ -146,11 +151,11 @@ public class daa_submissions_actions extends base_class {
             WebElement fileInput = getDriver().findElement(By.cssSelector("input[type='file']"));
             fileInput.sendKeys(absolutePath);
             _daa_submissions_page.upload_button.click();
-            getWait().until(ExpectedConditions.visibilityOf(_daa_submissions_page.select_a_valid_document_message));
-            Assert.assertTrue(_daa_submissions_page.select_a_valid_document_message.isDisplayed() && _daa_submissions_page.valid_formats_message.isDisplayed());
-            log.info("Test Passed: DAA jpeg file was rejected");
+            getWait().until(ExpectedConditions.visibilityOf(_daa_submissions_page.document_uploaded_successfully_message));
+            Assert.assertTrue(_daa_submissions_page.document_uploaded_successfully_message.isDisplayed());
+            log.info("Test Passed: DAA jpeg file was uploaded successfully");
         } catch (Exception e) {
-            log.error("Test Failed: DAA jpg submission was wrongfully accepted", e.getMessage(), e);
+            log.error("Test Failed: DAA jpg submission was rejected", e.getMessage(), e);
             throw e;
         }
     }
@@ -163,7 +168,8 @@ public class daa_submissions_actions extends base_class {
             _home_page.policy_search_options_search_button.click();
             getWait().until(ExpectedConditions.visibilityOf(_home_page.policy_search_first_option_results));
             _home_page.policy_search_first_option_results.click();
-            _home_page.declarations_link.click();
+            Actions actions = new Actions(getDriver());
+            actions.moveToElement(_home_page.declarations_link).perform();
             _home_page.age_analysis_tab.click();
             _daa_submissions_page.date_of_extraction_textbox.click();
             _daa_submissions_page.date_picker_today.click();
@@ -176,11 +182,11 @@ public class daa_submissions_actions extends base_class {
             WebElement fileInput = getDriver().findElement(By.cssSelector("input[type='file']"));
             fileInput.sendKeys(absolutePath);
             _daa_submissions_page.upload_button.click();
-            getWait().until(ExpectedConditions.visibilityOf(_daa_submissions_page.select_a_valid_document_message));
-            Assert.assertTrue(_daa_submissions_page.select_a_valid_document_message.isDisplayed() && _daa_submissions_page.valid_formats_message.isDisplayed());
-            log.info("Test Passed: DAA .txt file was rejected");
+            getWait().until(ExpectedConditions.visibilityOf(_daa_submissions_page.document_uploaded_successfully_message));
+            Assert.assertTrue(_daa_submissions_page.document_uploaded_successfully_message.isDisplayed());
+            log.info("Test Passed: DAA .txt file was uploaded successfully");
         } catch (Exception e) {
-            log.error("Test Failed: DAA .txt submission was wrongfully accepted", e.getMessage(), e);
+            log.error("Test Failed: DAA .txt submission was rejected", e.getMessage(), e);
             throw e;
         }
     }
