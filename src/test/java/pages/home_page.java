@@ -92,6 +92,6 @@ public class home_page extends base_class {
         if (this.driver == null) {
             throw new IllegalStateException("Driver is null in home page constructor.");
         }
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(DriverFactory.getDriver(), this);
     }
 }

@@ -185,6 +185,8 @@ public class daa_submissions_actions extends base_class {
             getWait().until(ExpectedConditions.visibilityOf(_daa_submissions_page.document_uploaded_successfully_message));
             Assert.assertTrue(_daa_submissions_page.document_uploaded_successfully_message.isDisplayed());
             log.info("Test Passed: DAA .txt file was uploaded successfully");
+
+            System.out.println("Driver in Page Object: " + getDriver().getClass().getName());
         } catch (Exception e) {
             log.error("Test Failed: DAA .txt submission was rejected", e.getMessage(), e);
             throw e;

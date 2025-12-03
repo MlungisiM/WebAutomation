@@ -66,6 +66,6 @@ public class daa_submissions_page {
         if (this.driver == null) {
             throw new IllegalStateException("Driver is null in home page constructor.");
         }
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(DriverFactory.getDriver(), this);
     }
 }

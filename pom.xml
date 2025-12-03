@@ -168,11 +168,7 @@
             <version>7.0.0</version>
         </dependency>
 
-
-
     </dependencies>
-
-
 
   <build>
 <plugins>
@@ -183,6 +179,7 @@
         <configuration>
             <includes>
                 <include>**/login_tests.java</include>
+                <include>**/daa_submissions_tests.java</include>
             </includes>
         </configuration>
     </plugin>
