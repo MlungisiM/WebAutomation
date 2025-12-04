@@ -1,22 +1,21 @@
 package tests;
 
-import actions.daa_submissions_actions;
-import actions.login_actions;
-import base.base_class;
+import actions.LoginActions;
+import base.BaseClass;
 import configurations.ExtentTestListener;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners(ExtentTestListener.class)
-public class login_tests extends base_class {
+public class login_tests extends BaseClass {
 
-    login_actions login;
+    LoginActions login;
 
     @BeforeMethod()
     public void initPages() throws Exception {
         super.setUp();          // ✅ This initializes WebDriver properly
-        login = new login_actions();
+        login = new LoginActions();
         login.init();           // ✅ Now getDriver() is not null
     }
 

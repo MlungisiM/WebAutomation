@@ -1,8 +1,8 @@
 package tests;
 
-import actions.daa_submissions_actions;
-import actions.login_actions;
-import base.base_class;
+import actions.DaaSubmissionsActions;
+import actions.LoginActions;
+import base.BaseClass;
 import configurations.ExtentTestListener;
 
 import org.testng.annotations.BeforeMethod;
@@ -11,10 +11,10 @@ import org.testng.annotations.Test;
 
 
 @Listeners(ExtentTestListener.class)
-public class daa_submissions_tests extends base_class {
+public class daa_submissions_tests extends BaseClass {
 
-    daa_submissions_actions submissions;
-    login_actions login;
+    DaaSubmissionsActions submissions;
+    LoginActions login;
 
 
     @BeforeMethod()
@@ -22,11 +22,11 @@ public class daa_submissions_tests extends base_class {
         super.setUp(); // initializes WebDriver
 
         // Initialize login actions
-        login = new login_actions();
+        login = new LoginActions();
         login.init();
 
         // Initialize submissions actions
-        submissions = new daa_submissions_actions();
+        submissions = new DaaSubmissionsActions();
         submissions.init();
     }
 

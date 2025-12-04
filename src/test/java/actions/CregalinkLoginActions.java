@@ -1,21 +1,17 @@
 package actions;
 
-import base.base_class;
+import base.BaseClass;
 import factory.DriverFactory;
-import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import pages.login_page;
+import pages.LoginPage;
 
 
-public class login_actions extends base_class {
+public class LoginActions extends BaseClass {
 
-    private login_page _login_page;
+    private LoginPage _loginPage;
     String sso_username = DriverFactory.prop.getProperty("sso_username");
     String sso_password = DriverFactory.prop.getProperty("sso_password");
 
@@ -32,7 +28,7 @@ public class login_actions extends base_class {
             log.error("WebDriver is not initialized.");
             throw new IllegalStateException("WebDriver is not initialized.");
         }
-        _login_page = new login_page();
+        _loginPage = new LoginPage();
     }
 
 
@@ -47,21 +43,21 @@ public class login_actions extends base_class {
         }
 
         try {
-            getWait().until(ExpectedConditions.elementToBeClickable(_login_page.cregalink_username_textbox));
-            _login_page.cregalink_username_textbox.click();
-            _login_page.cregalink_username_textbox.sendKeys(cregalink_username);
-            _login_page.cregalink_password_textbox.click();
-            _login_page.cregalink_password_textbox.sendKeys(cregalink_password);
-            _login_page.cregalink_login_button.click();
-            getWait().until(ExpectedConditions.elementToBeClickable(_login_page.disclaimer_checkbox));
-            _login_page.disclaimer_checkbox.click();
+            getWait().until(ExpectedConditions.elementToBeClickable(_loginPage.cregalink_username_textbox));
+            _loginPage.cregalink_username_textbox.click();
+            _loginPage.cregalink_username_textbox.sendKeys(cregalink_username);
+            _loginPage.cregalink_password_textbox.click();
+            _loginPage.cregalink_password_textbox.sendKeys(cregalink_password);
+            _loginPage.cregalink_login_button.click();
+            getWait().until(ExpectedConditions.elementToBeClickable(_loginPage.disclaimer_checkbox));
+            _loginPage.disclaimer_checkbox.click();
 
             getWait().ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.elementToBeClickable(_login_page.accept_disclaimer_button))
+                    .until(ExpectedConditions.elementToBeClickable(_loginPage.accept_disclaimer_button))
                     .click();
 
             log.info("User accepted the Cregalink disclaimer");
-            Assert.assertTrue(_login_page.logout_button.isDisplayed());
+            Assert.assertTrue(_loginPage.logout_button.isDisplayed());
             log.info("User logged in successfully with username: {}", cregalink_username);
         } catch (Exception e) {
             log.error("Login failed: {}", e.getMessage(), e);
@@ -80,14 +76,14 @@ public class login_actions extends base_class {
         }
 
         try {
-            getWait().until(ExpectedConditions.elementToBeClickable(_login_page.cregalink_username_textbox));
-            _login_page.cregalink_username_textbox.click();
-            _login_page.cregalink_username_textbox.sendKeys("qwerty");
-            _login_page.cregalink_password_textbox.click();
-            _login_page.cregalink_password_textbox.sendKeys(cregalink_password);
-            _login_page.cregalink_login_button.click();
-            String Invalidmessage = _login_page.invalid_useridOrpassword_message.getText();
-            getWait().until(ExpectedConditions.visibilityOf(_login_page.invalid_useridOrpassword_message));
+            getWait().until(ExpectedConditions.elementToBeClickable(_loginPage.cregalink_username_textbox));
+            _loginPage.cregalink_username_textbox.click();
+            _loginPage.cregalink_username_textbox.sendKeys("qwerty");
+            _loginPage.cregalink_password_textbox.click();
+            _loginPage.cregalink_password_textbox.sendKeys(cregalink_password);
+            _loginPage.cregalink_login_button.click();
+            String Invalidmessage = _loginPage.invalid_useridOrpassword_message.getText();
+            getWait().until(ExpectedConditions.visibilityOf(_loginPage.invalid_useridOrpassword_message));
             Assert.assertTrue(Invalidmessage.contains("Invalid user or password"));
             log.info("Validation Successful: User could not login using an incorrect username when using username: {}");
         } catch (Exception e) {
@@ -104,11 +100,11 @@ public class login_actions extends base_class {
         }
 
         try {
-            getWait().until(ExpectedConditions.elementToBeClickable(_login_page.cregalink_username_textbox));
-            _login_page.cregalink_password_textbox.click();
-            _login_page.cregalink_password_textbox.sendKeys(cregalink_password);
-            _login_page.cregalink_login_button.click();
-            String enteruserid_message = _login_page.enter_userid_message.getText();
+            getWait().until(ExpectedConditions.elementToBeClickable(_loginPage.cregalink_username_textbox));
+            _loginPage.cregalink_password_textbox.click();
+            _loginPage.cregalink_password_textbox.sendKeys(cregalink_password);
+            _loginPage.cregalink_login_button.click();
+            String enteruserid_message = _loginPage.enter_userid_message.getText();
             Assert.assertTrue(enteruserid_message.contains("Please enter userid"));
             log.info("Validation Successful: User could not login with an empty username");
         } catch (Exception e) {
@@ -128,14 +124,14 @@ public class login_actions extends base_class {
         }
 
         try {
-            getWait().until(ExpectedConditions.elementToBeClickable(_login_page.cregalink_username_textbox));
-            _login_page.cregalink_username_textbox.click();
-            _login_page.cregalink_username_textbox.sendKeys(cregalink_username);
-            _login_page.cregalink_password_textbox.click();
-            _login_page.cregalink_password_textbox.sendKeys("741852");
-            _login_page.cregalink_login_button.click();
-            String Invalidmessage = _login_page.invalid_useridOrpassword_message.getText();
-            getWait().until(ExpectedConditions.visibilityOf(_login_page.invalid_useridOrpassword_message));
+            getWait().until(ExpectedConditions.elementToBeClickable(_loginPage.cregalink_username_textbox));
+            _loginPage.cregalink_username_textbox.click();
+            _loginPage.cregalink_username_textbox.sendKeys(cregalink_username);
+            _loginPage.cregalink_password_textbox.click();
+            _loginPage.cregalink_password_textbox.sendKeys("741852");
+            _loginPage.cregalink_login_button.click();
+            String Invalidmessage = _loginPage.invalid_useridOrpassword_message.getText();
+            getWait().until(ExpectedConditions.visibilityOf(_loginPage.invalid_useridOrpassword_message));
             Assert.assertTrue(Invalidmessage.contains("Invalid user or password"));
             log.info("Validation Successful: User could not login with an incorrect password when using password: {}");
         } catch (Exception e) {
@@ -152,11 +148,11 @@ public class login_actions extends base_class {
         }
 
         try {
-            getWait().until(ExpectedConditions.elementToBeClickable(_login_page.cregalink_username_textbox));
-            _login_page.cregalink_username_textbox.click();
-            _login_page.cregalink_username_textbox.sendKeys(cregalink_username);
-            _login_page.cregalink_login_button.click();
-            String enteruserid_message = _login_page.enter_userid_message.getText();
+            getWait().until(ExpectedConditions.elementToBeClickable(_loginPage.cregalink_username_textbox));
+            _loginPage.cregalink_username_textbox.click();
+            _loginPage.cregalink_username_textbox.sendKeys(cregalink_username);
+            _loginPage.cregalink_login_button.click();
+            String enteruserid_message = _loginPage.enter_userid_message.getText();
             Assert.assertTrue(enteruserid_message.contains("Please enter userid"));
             log.info("Validation Successful: User could not login with an empty password");
         } catch (Exception e) {

@@ -29,7 +29,6 @@ public class daa_submissions_actions extends base_class {
             log.error("WebDriver is not initialized.");
             throw new IllegalStateException("WebDriver is not initialized.");
         }
-
         _login_page = new login_page();
         _home_page = new home_page();
         _daa_submissions_page = new daa_submissions_page();
