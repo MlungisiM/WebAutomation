@@ -7,13 +7,13 @@
     </listeners>
     <test name="Login Tests">
         <classes>
-            <class name="tests.login_tests"/>
+            <class name="tests.LoginTests"/>
         </classes>
     </test>
 
     <test name="DAA Submission Tests">
         <classes>
-            <class name="tests.daa_submissions_tests"/>
+            <class name="tests.DaaSubmissionsTests"/>
         </classes>
     </test>
 </suite>

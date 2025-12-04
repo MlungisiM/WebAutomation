@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
 
 
-public class LoginActions extends BaseClass {
+public class CregalinkLoginActions extends BaseClass {
 
     private LoginPage _loginPage;
     String sso_username = DriverFactory.prop.getProperty("sso_username");

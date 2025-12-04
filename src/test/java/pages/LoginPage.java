@@ -5,9 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-public class login_page {
+public class LoginPage {
 
     private WebDriver driver;
 
@@ -59,7 +58,7 @@ public class login_page {
     @FindBy(xpath = "//span[normalize-space()='Invalid user or password']")
     public WebElement invalid_useridOrpassword_message;
 
-    public login_page() {
+    public LoginPage() {
         this.driver = DriverFactory.getDriver();
         if (this.driver == null) {
             throw new IllegalStateException("Driver is null in login page constructor.");

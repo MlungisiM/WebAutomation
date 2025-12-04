@@ -1,7 +1,5 @@
 package base;
 
-import actions.DaaSubmissionsActions;
-import actions.LoginActions;
 import factory.DriverFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,17 +20,15 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.function.Function;
 
-public abstract class base_class extends DriverFactory {
+public abstract class BaseClass extends DriverFactory {
 
-    public static Logger log = LogManager.getLogger(base_class.class);
+    public static Logger log = LogManager.getLogger(BaseClass.class);
     private static final Properties prop = new Properties();
     public static final int AUT_MAX_WAIT = 60;
-    LoginActions login;
-    DaaSubmissionsActions daa_submissions;
 
     public void setUp() throws Exception {
         if (DriverFactory.prop == null || DriverFactory.prop.isEmpty()) {
-            try (InputStream input = base_class.class
+            try (InputStream input = BaseClass.class
                     .getClassLoader()
                     .getResourceAsStream("web_config.properties")) {
 
@@ -45,12 +41,7 @@ public abstract class base_class extends DriverFactory {
                 throw new RuntimeException("Failed to load web_config.properties", e);
             }
         }
-
-        WebDriver driver = DriverFactory.initDriver();
-        setDriver(driver); // ✅ Make sure setDriver is called
     }
-
-
 
     @AfterMethod
     public void tearDown() {
@@ -97,7 +88,7 @@ public abstract class base_class extends DriverFactory {
 
         Random random = new Random();
         int randomNumber = random.nextInt(10000); // Generates a random number up to 9999
-        return "testuser_" + generateDateTimeString() + "_" + randomNumber + "@standardbank.co.za";
+        return "testuser_" + generateDateTimeString() + "_" + randomNumber + "@cgic.co.za";
     }
 
     //generates a random phone number which starts with 27 (so it becomes a valid South African phone number)

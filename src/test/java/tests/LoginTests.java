@@ -1,6 +1,6 @@
 package tests;
 
-import actions.LoginActions;
+import actions.CregalinkLoginActions;
 import base.BaseClass;
 import configurations.ExtentTestListener;
 import org.testng.annotations.BeforeMethod;
@@ -8,14 +8,14 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners(ExtentTestListener.class)
-public class login_tests extends BaseClass {
+public class LoginTests extends BaseClass {
 
-    LoginActions login;
+    CregalinkLoginActions login;
 
     @BeforeMethod()
     public void initPages() throws Exception {
         super.setUp();          // ✅ This initializes WebDriver properly
-        login = new LoginActions();
+        login = new CregalinkLoginActions();
         login.init();           // ✅ Now getDriver() is not null
     }
 

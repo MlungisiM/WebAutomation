@@ -1,7 +1,7 @@
 package tests;
 
 import actions.DaaSubmissionsActions;
-import actions.LoginActions;
+import actions.CregalinkLoginActions;
 import base.BaseClass;
 import configurations.ExtentTestListener;
 
@@ -11,10 +11,10 @@ import org.testng.annotations.Test;
 
 
 @Listeners(ExtentTestListener.class)
-public class daa_submissions_tests extends BaseClass {
+public class DaaSubmissionsTests extends BaseClass {
 
     DaaSubmissionsActions submissions;
-    LoginActions login;
+    CregalinkLoginActions login;
 
 
     @BeforeMethod()
@@ -22,7 +22,7 @@ public class daa_submissions_tests extends BaseClass {
         super.setUp(); // initializes WebDriver
 
         // Initialize login actions
-        login = new LoginActions();
+        login = new CregalinkLoginActions();
         login.init();
 
         // Initialize submissions actions

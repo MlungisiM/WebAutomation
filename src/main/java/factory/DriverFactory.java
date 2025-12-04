@@ -14,7 +14,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
 import java.util.Properties;
-import java.util.UUID;
 
 public class DriverFactory {
 

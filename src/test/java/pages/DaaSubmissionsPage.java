@@ -6,11 +6,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.testng.annotations.Listeners;
 
 @Listeners(ExtentTestListener.class)
-public class daa_submissions_page {
+public class DaaSubmissionsPage {
 
     private WebDriver driver;
 
@@ -62,7 +61,7 @@ public class daa_submissions_page {
     @FindBy(xpath = "//*[@id=\"growl_container\"]/div[2]/div/div[2]/span")
     public WebElement select_a_valid_document_message;
 
-    public daa_submissions_page() {
+    public DaaSubmissionsPage() {
         this.driver = DriverFactory.getDriver();
         if (this.driver == null) {
             throw new IllegalStateException("Driver is null in home page constructor.");

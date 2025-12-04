@@ -1,6 +1,6 @@
 package pages;
 
-import base.base_class;
+import base.BaseClass;
 import configurations.ExtentTestListener;
 import factory.DriverFactory;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Listeners;
 
 @Listeners(ExtentTestListener.class)
-public class home_page extends base_class {
+public class HomePage extends BaseClass {
 
     private WebDriver driver;
 
@@ -87,7 +87,7 @@ public class home_page extends base_class {
     public WebElement claim_quick_link;
 
 
-    public home_page() {
+    public HomePage() {
         this.driver = DriverFactory.getDriver();
         if (this.driver == null) {
             throw new IllegalStateException("Driver is null in home page constructor.");
