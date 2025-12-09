@@ -10,8 +10,9 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import utilities.UserDefinedException;
-import java.io.IOException;
-import java.io.InputStream;
+
+import java.io.FileInputStream;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -26,21 +27,18 @@ public abstract class BaseClass extends DriverFactory {
     private static final Properties prop = new Properties();
     public static final int AUT_MAX_WAIT = 60;
 
-    public void setUp() throws Exception {
-        if (DriverFactory.prop == null || DriverFactory.prop.isEmpty()) {
-            try (InputStream input = BaseClass.class
-                    .getClassLoader()
-                    .getResourceAsStream("web_config.properties")) {
 
-                if (input == null) {
-                    throw new RuntimeException("web_config.properties not found in resources.");
-                }
-                prop.load(input);
-                DriverFactory.prop = prop;
-            } catch (IOException e) {
-                throw new RuntimeException("Failed to load web_config.properties", e);
+    public void setUp() throws Exception {
+        if (DriverFactory.prop == null) {
+            Properties p = new Properties();
+            // Point this to your actual config file:
+            String cfg = Paths.get("src", "main", "resources", "web_config.properties").toString();
+            try (FileInputStream fis = new FileInputStream(cfg)) {
+                p.load(fis);
             }
+            DriverFactory.prop = p;   // <-- make sure this is set
         }
+        DriverFactory.initDriver();   // <-- now this can read .prop safely
     }
 
     @AfterMethod

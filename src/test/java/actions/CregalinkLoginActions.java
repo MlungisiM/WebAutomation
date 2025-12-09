@@ -16,7 +16,7 @@ public class CregalinkLoginActions extends BaseClass {
     String sso_password = DriverFactory.prop.getProperty("sso_password");
 
     String cregalink_username = DriverFactory.prop.getProperty("cregalink_username");
-    String cregalink_password = getProperty("cregalink_password");
+    String cregalink_password = DriverFactory.prop.getProperty("cregalink_password");
 
     String username_missing_message = "Username is missing in properties file.";
     String password_missing_message = "Password is missing in properties file.";

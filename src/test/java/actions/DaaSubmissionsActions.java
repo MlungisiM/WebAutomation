@@ -20,7 +20,7 @@ public class DaaSubmissionsActions extends BaseClass {
     private HomePage _homePage;
     private DaaSubmissionsPage _daaSubmissionsPage;
 
-    String adf_outdoor_policy_no = DriverFactory.prop.getProperty("adf_outdoor_policy_no.");
+    String adf_outdoor_policy_no = DriverFactory.prop.getProperty("adf_outdoor_policy_no");
 
     public void init() {
         if (getDriver() == null) {
@@ -34,7 +34,12 @@ public class DaaSubmissionsActions extends BaseClass {
 
 
         public void Submit_Valid_Excel_DAA() throws Exception {
-        try{
+
+            if (adf_outdoor_policy_no == null || adf_outdoor_policy_no.isBlank()) {
+                throw new IllegalStateException("Missing property: adf_outdoor_policy_no");
+            }
+
+            try{
         Select search_option = new Select(_homePage.policy_search_options_dropdown);
         search_option.selectByVisibleText("Policy No");
         _homePage.policy_search_options_textbox.sendKeys(adf_outdoor_policy_no);

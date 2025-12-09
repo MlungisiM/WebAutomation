@@ -1,3 +1,4 @@
+
 package factory;
 
 import com.epam.healenium.SelfHealingDriver;
@@ -11,21 +12,22 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.interactions.Actions;
+
 import java.time.Duration;
 import java.util.Properties;
 
 public class DriverFactory {
-
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static final Logger log = LogManager.getLogger(DriverFactory.class);
-    public static Actions actions;
+
+    // Removed: public static Actions actions; (unsafe with ThreadLocal)
     public static Properties prop;
 
     // No changes needed to these standard methods
     public static WebDriver getDriver() {
         // This now returns the SelfHealingDriver instance stored in ThreadLocal
-        return driver.get();
+        WebDriver d = driver.get();
+        return d;
     }
 
     public static void setDriver(WebDriver driverInstance) {
@@ -52,8 +54,10 @@ public class DriverFactory {
 
         // Set Hudson CSP properties
         System.clearProperty("hudson.model.DirectoryBrowserSupport.CSP");
-        System.setProperty("hudson.model.DirectoryBrowserSupport.CSP",
-                "sandbox allow-scripts; default-src 'self'; script-src * 'unsafe-eval'; img-src *; style-src * 'unsafe-inline'; font-src *");
+        System.setProperty(
+                "hudson.model.DirectoryBrowserSupport.CSP",
+                "sandbox allow-scripts; default-src 'self'; script-src * 'unsafe-eval'; img-src *; style-src * 'unsafe-inline'; font-src *"
+        );
 
         WebDriver delegateDriver = null; // Temporary variable to hold the base WebDriver
 
@@ -70,7 +74,6 @@ public class DriverFactory {
                     delegateDriver = new ChromeDriver(chromeOptions); // Assign to delegate
                     log.info("Chrome driver instantiated");
                     break;
-
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -78,7 +81,6 @@ public class DriverFactory {
                     delegateDriver = new FirefoxDriver(firefoxOptions); // Assign to delegate
                     log.info("Firefox driver instantiated");
                     break;
-
                 case "edge":
                     WebDriverManager.edgedriver().setup();
                     EdgeOptions edgeOptions = new EdgeOptions();
@@ -86,26 +88,22 @@ public class DriverFactory {
                     delegateDriver = new EdgeDriver(edgeOptions); // Assign to delegate
                     log.info("Edge driver instantiated");
                     break;
-
                 default:
                     throw new RuntimeException("Unsupported browser: " + browserName);
             }
 
             // --- HEALENIUM INTEGRATION START ---
             // Wrap the base driver instance in the SelfHealingDriver
-            WebDriver selfHealingDriver = SelfHealingDriver.create(delegateDriver);
+            WebDriver selfHealingDriver = com.epam.healenium.SelfHealingDriver.create(delegateDriver);
             driver.set(selfHealingDriver); // Set the wrapped driver into ThreadLocal
             // --- HEALENIUM INTEGRATION END ---
 
-
             long startTime = System.currentTimeMillis();
-            getDriver().get(prop.getProperty("internal_qa_environment.url"));
+            getDriver().get(prop.getProperty("internal_dev_environment.url"));
             getDriver().manage().window().maximize();
             getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            actions = new Actions(driver.get());
             long totalTime = (System.currentTimeMillis() - startTime) / 1000;
             log.info("Total time to load URL: {} seconds", totalTime);
-
         } catch (Exception e) {
             log.error("Unable to start {} browser", browserName, e);
             // Ensure any partially created driver is quit if an error occurs

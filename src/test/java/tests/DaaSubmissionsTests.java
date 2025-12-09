@@ -31,7 +31,7 @@ public class DaaSubmissionsTests extends BaseClass {
     }
 
 
-    @Test(testName = "Submit a valid DAA file")
+    @Test(testName = "Submit a valid Excel DAA file")
         public void Valid_Excel_File_Submission() throws Exception {
         login.loginValidUsername();
         submissions.Submit_Valid_Excel_DAA();
