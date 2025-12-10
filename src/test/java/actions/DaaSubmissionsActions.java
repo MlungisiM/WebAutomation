@@ -9,14 +9,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pages.DaaSubmissionsPage;
 import pages.HomePage;
-import pages.LoginPage;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
 public class DaaSubmissionsActions extends BaseClass {
 
-    private LoginPage _loginPage;
     private HomePage _homePage;
     private DaaSubmissionsPage _daaSubmissionsPage;
 
@@ -27,14 +25,13 @@ public class DaaSubmissionsActions extends BaseClass {
             log.error("WebDriver is not initialized.");
             throw new IllegalStateException("WebDriver is not initialized.");
         }
-        _loginPage = new LoginPage();
+        // Initialize page object
         _homePage = new HomePage();
         _daaSubmissionsPage = new DaaSubmissionsPage();
     }
 
 
         public void Submit_Valid_Excel_DAA() throws Exception {
-
             if (adf_outdoor_policy_no == null || adf_outdoor_policy_no.isBlank()) {
                 throw new IllegalStateException("Missing property: adf_outdoor_policy_no");
             }

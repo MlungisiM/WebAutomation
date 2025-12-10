@@ -1,5 +1,10 @@
 package base;
 
+import actions.CregalinkLoginActions;
+import actions.DaaServiceActions;
+import actions.DaaServiceLoginActions;
+import actions.DaaSubmissionsActions;
+import configurations.DbUtils;
 import factory.DriverFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,9 +14,15 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import pages.DaaServicePage;
+import pages.DaaSubmissionsPage;
+import pages.HomePage;
+import pages.LoginPage;
 import utilities.UserDefinedException;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -27,19 +38,74 @@ public abstract class BaseClass extends DriverFactory {
     private static final Properties prop = new Properties();
     public static final int AUT_MAX_WAIT = 60;
 
+//    private LoginPage _loginPage;
+//    private HomePage _homePage;
+//    private DaaSubmissionsPage _daaSubmissionsPage;
+//    private DaaServicePage _daaServicePage;
+//
+//
+//    protected DaaSubmissionsActions submissionsActions;
+//    protected DaaServiceActions daaServiceActions;
+//    protected CregalinkLoginActions cregalinkLoginActions;
+//    protected DaaServiceLoginActions daaServiceLoginActions;
+//
+//
+//    public CregalinkLoginActions loginActions() { return cregalinkLoginActions; }
+//    public DaaSubmissionsActions submissions() { return submissionsActions; }
+//    public DaaServiceActions daaService() { return daaServiceActions; }
+//    public DaaServiceLoginActions daaServiceLogin() { return daaServiceLoginActions; }
 
+
+
+
+    @BeforeMethod
     public void setUp() throws Exception {
+        // 1) Load properties once
         if (DriverFactory.prop == null) {
             Properties p = new Properties();
-            // Point this to your actual config file:
-            String cfg = Paths.get("src", "main", "resources", "web_config.properties").toString();
-            try (FileInputStream fis = new FileInputStream(cfg)) {
-                p.load(fis);
+
+            // Prefer classpath loading (src/test/resources/config.properties)
+            try (InputStream is = Thread.currentThread()
+                    .getContextClassLoader()
+                    .getResourceAsStream("web_config.properties")) {
+                if (is == null) {
+                    // Fallback to explicit path if classpath not found
+                    String cfgPath = Paths.get("src", "test", "resources", "web_config.properties").toString();
+                    try (FileInputStream fis = new FileInputStream(cfgPath)) {
+
+
+                        p.load(fis);
+                    }
+                } else {
+                    p.load(is);
+                }
             }
-            DriverFactory.prop = p;   // <-- make sure this is set
+
+            DriverFactory.prop = p; // <-- critical
+            log.info("Config loaded. db.url={}", p.getProperty("db.url"));
         }
-        DriverFactory.initDriver();   // <-- now this can read .prop safely
+        // 2) Initialize DB pool *once*
+        DbUtils.init(DriverFactory.prop);
+
+        // 3) (Optional) Initialize WebDriver here if your test needs UI
+         DriverFactory.initDriver();
+
+        if (getDriver() == null) {
+            log.error("WebDriver is not initialized.");
+            throw new IllegalStateException("WebDriver is not initialized.");
+        }
+//        _loginPage = new LoginPage();
+//        _homePage = new HomePage();
+//        _daaSubmissionsPage = new DaaSubmissionsPage();
+//        _daaServicePage = new DaaServicePage();
+//
+//        submissionsActions = new DaaSubmissionsActions();
+//        daaServiceActions = new DaaServiceActions();
+//        cregalinkLoginActions = new CregalinkLoginActions();
+//        daaServiceLoginActions = new DaaServiceLoginActions();
     }
+
+
 
     @AfterMethod
     public void tearDown() {
@@ -49,6 +115,7 @@ public abstract class BaseClass extends DriverFactory {
                 getDriver().manage().deleteAllCookies();
                 getDriver().quit();
                 DriverFactory.removeDriver();
+                DbUtils.shutdown();
             }
         } catch (Exception e) {
             log.warn("TearDown error (driver likely already quit): {}", e.getMessage());

@@ -17,25 +17,21 @@ public class DaaSubmissionsTests extends BaseClass {
     CregalinkLoginActions login;
 
 
-    @BeforeMethod()
+    @BeforeMethod(alwaysRun = true)
     public void initPages() throws Exception {
-        super.setUp(); // initializes WebDriver
-
-        // Initialize login actions
+        super.setUp();           // initializes driver & props
         login = new CregalinkLoginActions();
-        login.init();
+        login.init();            // must be called
 
-        // Initialize submissions actions
         submissions = new DaaSubmissionsActions();
-        submissions.init();
+        submissions.init();      // must be called or you'll get NPEs
     }
 
 
     @Test(testName = "Submit a valid Excel DAA file")
         public void Valid_Excel_File_Submission() throws Exception {
         login.loginValidUsername();
-        submissions.Submit_Valid_Excel_DAA();
-    }
+        submissions.Submit_Valid_Excel_DAA();}
 
     @Test(testName = "Submit a valid CSV DAA file")
         public void Valid_CSV_File_Submission() throws Exception {
