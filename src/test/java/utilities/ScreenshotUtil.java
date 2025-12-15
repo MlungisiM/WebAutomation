@@ -7,7 +7,6 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.WrapsDriver;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
