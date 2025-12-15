@@ -1,8 +1,8 @@
-package configurations;
+package utilities;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-
+import utilities.ScreenshotUtil;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,15 +20,23 @@ public class ExtentTestManager {
         extentTestMap.put(Thread.currentThread().getId(), test);
     }
 
-    public static synchronized void endTest() {
-        extent.flush();
-    }
-
     // Attach screenshot to current test
     public static synchronized void logScreenshot(String screenshotName) {
-        String path = screenshotUtil.takeScreenshot(screenshotName);
-        if (path != null) {
-            getTest().addScreenCaptureFromPath(path);
+        var t = getTest();
+        if (t == null) {
+            startTest(screenshotName, screenshotName);
+            t = getTest();
+        }
+        String path = ScreenshotUtil.takeScreenshot(screenshotName);
+        if (path != null && !path.isBlank()) {
+            try {
+                t.addScreenCaptureFromPath(path); // keep as secondary attachment
+            } catch (Exception e) {
+                t.info("Failed to attach screenshot: " + e.getMessage());
+            }
+        } else {
+            t.info("Screenshot path was null/blank; nothing attached.");
+
         }
     }
 }

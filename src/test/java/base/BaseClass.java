@@ -1,10 +1,6 @@
 package base;
 
-import actions.CregalinkLoginActions;
-import actions.DaaServiceActions;
-import actions.DaaServiceLoginActions;
-import actions.DaaSubmissionsActions;
-import configurations.DbUtils;
+import utilities.DbUtils;
 import factory.DriverFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,10 +11,6 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.DaaServicePage;
-import pages.DaaSubmissionsPage;
-import pages.HomePage;
-import pages.LoginPage;
 import utilities.UserDefinedException;
 
 import java.io.FileInputStream;
@@ -38,25 +30,6 @@ public abstract class BaseClass extends DriverFactory {
     private static final Properties prop = new Properties();
     public static final int AUT_MAX_WAIT = 60;
 
-//    private LoginPage _loginPage;
-//    private HomePage _homePage;
-//    private DaaSubmissionsPage _daaSubmissionsPage;
-//    private DaaServicePage _daaServicePage;
-//
-//
-//    protected DaaSubmissionsActions submissionsActions;
-//    protected DaaServiceActions daaServiceActions;
-//    protected CregalinkLoginActions cregalinkLoginActions;
-//    protected DaaServiceLoginActions daaServiceLoginActions;
-//
-//
-//    public CregalinkLoginActions loginActions() { return cregalinkLoginActions; }
-//    public DaaSubmissionsActions submissions() { return submissionsActions; }
-//    public DaaServiceActions daaService() { return daaServiceActions; }
-//    public DaaServiceLoginActions daaServiceLogin() { return daaServiceLoginActions; }
-
-
-
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -64,7 +37,6 @@ public abstract class BaseClass extends DriverFactory {
         if (DriverFactory.prop == null) {
             Properties p = new Properties();
 
-            // Prefer classpath loading (src/test/resources/config.properties)
             try (InputStream is = Thread.currentThread()
                     .getContextClassLoader()
                     .getResourceAsStream("web_config.properties")) {
@@ -94,18 +66,7 @@ public abstract class BaseClass extends DriverFactory {
             log.error("WebDriver is not initialized.");
             throw new IllegalStateException("WebDriver is not initialized.");
         }
-//        _loginPage = new LoginPage();
-//        _homePage = new HomePage();
-//        _daaSubmissionsPage = new DaaSubmissionsPage();
-//        _daaServicePage = new DaaServicePage();
-//
-//        submissionsActions = new DaaSubmissionsActions();
-//        daaServiceActions = new DaaServiceActions();
-//        cregalinkLoginActions = new CregalinkLoginActions();
-//        daaServiceLoginActions = new DaaServiceLoginActions();
     }
-
-
 
     @AfterMethod
     public void tearDown() {
@@ -150,7 +111,6 @@ public abstract class BaseClass extends DriverFactory {
     }
 
     public static String generateRandomEmail() {
-
         Random random = new Random();
         int randomNumber = random.nextInt(10000); // Generates a random number up to 9999
         return "testuser_" + generateDateTimeString() + "_" + randomNumber + "@cgic.co.za";
@@ -158,7 +118,6 @@ public abstract class BaseClass extends DriverFactory {
 
     //generates a random phone number which starts with 27 (so it becomes a valid South African phone number)
     public CharSequence SA_random_phone_number() {
-
         Random rand = new Random();
         int num1 = 27;
         int num2 = rand.nextInt(743);

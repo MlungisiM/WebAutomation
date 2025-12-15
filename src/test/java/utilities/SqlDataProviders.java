@@ -1,5 +1,5 @@
 
-package configurations;
+package utilities;
 
 import org.testng.annotations.DataProvider;
 

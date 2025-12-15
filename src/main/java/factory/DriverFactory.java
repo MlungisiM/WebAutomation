@@ -1,7 +1,5 @@
-
 package factory;
 
-import com.epam.healenium.SelfHealingDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,10 +17,10 @@ public class DriverFactory {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static final Logger log = LogManager.getLogger(DriverFactory.class);
 
-    // Removed: public static Actions actions; (unsafe with ThreadLocal)
+
     public static Properties prop;
 
-    // No changes needed to these standard methods
+
     public static WebDriver getDriver() {
         // This now returns the SelfHealingDriver instance stored in ThreadLocal
         WebDriver d = driver.get();
@@ -98,7 +96,7 @@ public class DriverFactory {
             // --- HEALENIUM INTEGRATION END ---
 
             long startTime = System.currentTimeMillis();
-            getDriver().get(prop.getProperty("internal_dev_environment.url"));
+            getDriver().get(prop.getProperty("DaaServiceQA"));
             getDriver().manage().window().maximize();
             getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             long totalTime = (System.currentTimeMillis() - startTime) / 1000;

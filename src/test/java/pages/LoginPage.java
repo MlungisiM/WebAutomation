@@ -43,13 +43,13 @@ public class LoginPage {
     @FindBy(id = "frmlogin:btnlogin")
     public WebElement cregalink_login_button;
 
-    @FindBy(id = "j_id_k:j_id_m")
+    @FindBy(id = "j_id_o:j_id_q")
     public WebElement disclaimer_checkbox;
 
-    @FindBy(id = "j_id_12:acceptNew")
+    @FindBy(id = "j_id_16:acceptNew")
     public WebElement accept_disclaimer_button;
 
-    @FindBy(id = "j_id_36")
+    @FindBy(id = "j_id_3d")
     public WebElement logout_button;
 
     @FindBy(xpath = "//span[normalize-space()='Please enter userid']")

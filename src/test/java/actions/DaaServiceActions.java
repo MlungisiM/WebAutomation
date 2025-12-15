@@ -1,21 +1,8 @@
 package actions;
 
 import base.BaseClass;
-import factory.DriverFactory;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pages.DaaServicePage;
-import pages.DaaSubmissionsPage;
-import pages.HomePage;
-import pages.LoginPage;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 
 public class DaaServiceActions extends BaseClass {
 
@@ -33,6 +20,7 @@ public class DaaServiceActions extends BaseClass {
     public void LoginDaaServiceSuccessfully() throws Exception {
         try{
             _DaaServicePage.login_button.click();
+
             Assert.assertTrue(_DaaServicePage.logout_button.isDisplayed());
             log.info("User logged in successfully.");
             log.info("Page title is: "+getDriver().getTitle());

@@ -1,5 +1,5 @@
 
-package configurations;
+package utilities;
 
 import base.BaseClass;
 import com.zaxxer.hikari.HikariConfig;
@@ -17,7 +17,7 @@ public class DbUtils extends BaseClass {
         String url = prop.getProperty("db.url");
         String user = resolve(prop.getProperty("db.user"));
         String pass = resolve(prop.getProperty("db.password"));
-        int poolSize = Integer.parseInt(prop.getProperty("db.pool.size", "3"));
+        int poolSize = Integer.parseInt(prop.getProperty("db.pool.size", "5"));
 
         HikariConfig cfg = new HikariConfig();
         cfg.setJdbcUrl(url);

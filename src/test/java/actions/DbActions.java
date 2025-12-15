@@ -1,7 +1,7 @@
 package actions;
 
 import base.BaseClass;
-import configurations.DbUtils;
+import utilities.DbUtils;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

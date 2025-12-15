@@ -10,6 +10,15 @@ public class DaaServicePage {
 
     private WebDriver driver;
 
+    @FindBy(id = "i0116")
+    public WebElement username_textbox;
+
+    @FindBy(id = "i0118")
+    public WebElement password_textbox;
+
+    @FindBy(id = "idSIButton9")
+    public WebElement next_and_signin_button;
+
     @FindBy(xpath = "//span[normalize-space()='Login']")
     public WebElement login_button;
 

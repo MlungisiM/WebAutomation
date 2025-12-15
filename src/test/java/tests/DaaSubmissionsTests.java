@@ -3,7 +3,7 @@ package tests;
 import actions.DaaSubmissionsActions;
 import actions.CregalinkLoginActions;
 import base.BaseClass;
-import configurations.ExtentTestListener;
+import utilities.ExtentTestListener;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;

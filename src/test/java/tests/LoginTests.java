@@ -2,7 +2,7 @@ package tests;
 
 import actions.CregalinkLoginActions;
 import base.BaseClass;
-import configurations.ExtentTestListener;
+import utilities.ExtentTestListener;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

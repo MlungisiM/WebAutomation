@@ -3,7 +3,7 @@
 
 <suite name="Cregalink Regression Test Suite" parallel="tests" thread-count="2">
     <listeners>
-        <listener class-name="configurations.ExtentTestListener"/>
+        <listener class-name="utilities.ExtentTestListener"/>
     </listeners>
     <test name="Login Tests">
         <classes>
