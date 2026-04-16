@@ -194,10 +194,10 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
-            <includes>
+           <!-- <includes>
                 <include>**/login_tests.java</include>
                 <include>**/daa_submissions_tests.java</include>
-            </includes>
+            </includes> -->
         </configuration>
     </plugin>
 
