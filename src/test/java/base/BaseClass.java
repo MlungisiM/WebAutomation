@@ -88,7 +88,7 @@ public abstract class BaseClass extends DriverFactory {
     }
 
     public static Properties getProperties() {
-        return prop;
+        return DriverFactory.prop;
     }
 
     public static String getProperty(String key) {
