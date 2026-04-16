@@ -7,7 +7,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import java.sql.*;
 import java.util.Properties;
 
-public class DbUtils extends BaseClass {
+public class DbUtils {
     private static HikariDataSource ds;
 
     // Initialize once (e.g., from BaseClass.setUp() after properties are loaded)
